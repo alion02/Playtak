@@ -45,7 +45,7 @@ Currently two protocol versions are supported, 0 and 1. The only difference bein
 |PING |Pings to inform server that the client is alive. Recommended ping spacing is 30 seconds. Server may disconnect clients if pings are not received|
 |quit |Sent by client to indicate it is going to quit. Server removes all seeks, abandons (which loses) game if any|
 
-The *Client*, *Login* and *Register* are the only three commands which work while not logged in.
+The *PING*, *Client*, *Protocol*, *Login* and *Register* are the only five commands which work while not logged in.
 
 The server to client messages and their format is as below.
 The list does not include error messages, you're free to poke around and figure out the error messages on your own or look at the code.
@@ -62,7 +62,7 @@ The list does not include error messages, you're free to poke around and figure 
 |Game#**no** M **Sq1** **Sq2** **no1** **no2**...|The 'Move' move played by the other player in game number **no**. The format is same as the command from client to server|
 |Game#**no** Time **whitetime** **blacktime** |Update the clock with the time specified for white and black players, time given in seconds|
 |Game#**no** Timems **whitetime** **blacktime** |Update the clock with the time specified for white and black players, time given in milliseconds, only sent if the client has opted in to protocol version 1 or later|
-|Game#**no** Over **result**|Game number **no** is over. **result** is one of *R-0*, *0-R*, *F-0*, *0-F*, *1/2-1/2*|
+|Game#**no** Over **result**|Game number **no** is over. **result** is one of *R-0*, *0-R*, *F-0*, *0-F*, *1-0*, *0-1*, *1/2-1/2*|
 |Game#**no** OfferDraw |Indicates the opponent has offered a draw|
 |Game#**no** RemoveDraw |Indicates your opponent has taken back his offer to draw|
 |Game#**no** RequestUndo |Request from opponent to undo the last move|
@@ -79,7 +79,7 @@ The list does not include error messages, you're free to poke around and figure 
 |Tell \<**player**\> **text** |Private chat message **text** from **player**|
 |Told \<**player**\> **text** |Confirmation that your message is sent to **player**. You'll receive this even if **player** is not logged in|
 |Message **text** |A message from server. Might be used to indicate announcements like name accepted/server going down, etc|
-|Error **text** |An error message|
+|Error:**text** |An error message|
 |Online **no** |**no** players are connected to server|
 |NOK |Indicates the command client send is invalid or unrecognized|
 |OK  |Indicates previous command is ok. Clients can ignore this. *I might remove this message altogether in future as it serves no real purpose*|
@@ -87,7 +87,7 @@ The list does not include error messages, you're free to poke around and figure 
 ##Info for Client developers
 Stand alone clients can connect directly to playtak.com at port 10000 (but this communication will not be encrypted)
 <br>
-The defalut Web client runs on playtak.com port 80/443.
+The default Web client runs on playtak.com port 80/443.
 <br>
 **telnet to playtak.com on port 10000 to test the commands.**
 
